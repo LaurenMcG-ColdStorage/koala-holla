@@ -6,13 +6,13 @@ const koalas = require('../data/koala-data');
 
 // GET
 koalaRouter.get('/',(req, res) => {
-    res.send()
+    res.send(koalas);
 });
 
 // POST
-koalaRouter.post('/', (req, res => {
+koalaRouter.post('/', (req, res) => {
 
-}));
+});
 
 // PUT
 

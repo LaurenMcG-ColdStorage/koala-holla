@@ -12,6 +12,7 @@ function getKoalas(){
     const allTheKoalas = response.data;
     koalaTable.innerHTML = ''
     for (let koala of allTheKoalas){
+      if (koala.readyToTransfer === "Y"){
       koalaTable.innerHTML += `
       <tr>
         <td>${koala.name}</td>
@@ -19,19 +20,22 @@ function getKoalas(){
         <td>${koala.gender}</td>
         <td>${koala.readyToTransfer}</td>
         <td>${koala.notes}</td>
-      `
-      if (koala.readyToTransfer === "Y"){
-        koalaTable.innerHTML += `
-          <td>''</td>
-          <td>Add a delete button in here</td>
-        </tr>
+        <td></td>
+        <td>Add a delete button in here</td>
+      </tr>
         `
       } else {
         koalaTable.innerHTML += `
-          <td>Add a mark ready button in here</td>
+        <tr>
+          <td>${koala.name}</td>
+          <td>${koala.age}</td>
+          <td>${koala.gender}</td>
+          <td>${koala.readyToTransfer}</td>
+          <td>${koala.notes}</td>
+          <td>Add a mark ready button</td>
           <td>Add a delete button in here</td>
         </tr>
-        `
+          `
       }
     }
   })
