@@ -11,7 +11,11 @@ koalaRouter.get('/',(req, res) => {
 
 // POST
 koalaRouter.post('/', (req, res) => {
-
+    const newKoala = req.body;  //Stores our new koala
+    //let lastID = koalas.length; //Finds current max ID
+    //newKoala.id = lastID +1;    //Assigns new koala an ID
+    koalas.push(newKoala);      //Updates koala array
+    res.sendStatus(201);
 });
 
 // PUT
