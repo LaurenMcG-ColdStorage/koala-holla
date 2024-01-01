@@ -1,7 +1,7 @@
-const koalas = [
+let koalas = [
     {
         id: 1,
-        name: 'Scotty',
+        name: "Scotty",
         gender: 'M',
         age: 4,
         readyToTransfer: 'Y',
@@ -9,7 +9,7 @@ const koalas = [
     },
     {
         id: 2,
-        name: 'Jean',
+        name: "Jean",
         gender: 'F',
         age: 5,
         readyToTransfer: 'Y',
@@ -17,7 +17,7 @@ const koalas = [
     },
     {
         id: 3,
-        name: 'Ororo',
+        name: "Ororo",
         gender: 'F',
         age: 7,
         readyToTransfer: 'N',
@@ -29,11 +29,11 @@ const koalas = [
         gender: 'NB',
         age: 15,
         readyToTransfer: 'N',
-        notes: 'Never refuses a treat.'
+        notes: 'Never refuses a treat'
     },
     {
         id: 5,
-        name: 'Charlie',
+        name: "Charlie",
         gender: 'M',
         age: 9,
         readyToTransfer: 'Y',
@@ -41,7 +41,7 @@ const koalas = [
     },
     {
         id: 6,
-        name: 'Betsy',
+        name: "Betsy",
         gender: 'F',
         age: 4,
         readyToTransfer: 'Y',

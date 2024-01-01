@@ -1,3 +1,5 @@
+//const koalas = require("../../data/koala-data");
+
 console.log( 'js' );
 
 function getKoalas(){
@@ -60,8 +62,8 @@ function saveKoala(){
 
 function renderKoalas(response){
   const koalaTable = document.querySelector('#viewKoalas');
-    const allTheKoalas = response.data;
-    koalaTable.innerHTML = ''
+  const allTheKoalas = response.data;
+  koalaTable.innerHTML = ''
     for (let koala of allTheKoalas){
       if (koala.readyToTransfer === "Y"){
       koalaTable.innerHTML += `
@@ -72,7 +74,7 @@ function renderKoalas(response){
         <td>${koala.readyToTransfer}</td>
         <td>${koala.notes}</td>
         <td></td>
-        <td>Add a delete button in here</td>
+        <td><button id='deleteKoala' onclick="deleteEntry(event)" data-id="${koala.id}">Remove Koala</button></td>
       </tr>
         `
       } else {
@@ -83,12 +85,64 @@ function renderKoalas(response){
           <td>${koala.gender}</td>
           <td>${koala.readyToTransfer}</td>
           <td>${koala.notes}</td>
-          <td>Add a mark ready button</td>
-          <td>Add a delete button in here</td>
+          <td><button id='markUp' onclick="markReady(event)" data-id="${koala.id}">Mark Ready</button></td>
+          <td><button id='deleteKoala' onclick="deleteEntry(event)" data-id="${koala.id}">Remove Koala</button></td>
         </tr>
           `
       }
     }
+}
+
+function markReady(event){
+  const koalaReady = event.target.dataset.id;
+  console.log(koalaReady);
+  axios({
+    method: 'PUT',
+    url: `/koalas/${koalaReady}`,
+  })
+  .then((response) => {
+      axios({
+        method: 'GET',
+        url: '/koalas'
+      })
+      .then((response) => {
+        renderKoalas(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  })
+  .catch((error) => {
+    console.log(error);
+  })
+
+
+}
+
+function deleteEntry(event){
+  const buttonElement = event.target.dataset.id;;
+  console.log('DELETE: ', buttonElement);
+  
+  axios({
+    method: 'DELETE',
+    url: `/koalas/${buttonElement}`,
+  })
+  .then((response) => {
+    //console.log('Deleted koala: ', buttonElement);
+      axios({
+        method: 'GET',
+        url: '/koalas',
+      })
+      .then((response) => {
+        renderKoalas(response);
+      })
+      .catch((error) => {
+        console.log(error)
+    })
+  })
+  .catch((error) => {
+      console.log(error);
+  })
 }
 
 getKoalas();
