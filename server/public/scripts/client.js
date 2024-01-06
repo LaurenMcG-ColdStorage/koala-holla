@@ -62,6 +62,7 @@ function saveKoala(){
 
 function renderKoalas(response){
   const koalaTable = document.querySelector('#viewKoalas');
+  console.log(response.data);
   const allTheKoalas = response.data;
   koalaTable.innerHTML = ''
     for (let koala of allTheKoalas){
@@ -73,7 +74,7 @@ function renderKoalas(response){
         <td>${koala.gender}</td>
         <td>${koala.readyToTransfer}</td>
         <td>${koala.notes}</td>
-        <td></td>
+        <td><button id='markUp' onclick="markReady(event, 'Y')" data-id="${koala.id}">Mark Not Ready</button></td>
         <td><button id='deleteKoala' onclick="deleteEntry(event)" data-id="${koala.id}">Remove Koala</button></td>
       </tr>
         `
@@ -85,7 +86,7 @@ function renderKoalas(response){
           <td>${koala.gender}</td>
           <td>${koala.readyToTransfer}</td>
           <td>${koala.notes}</td>
-          <td><button id='markUp' onclick="markReady(event)" data-id="${koala.id}">Mark Ready</button></td>
+          <td><button id='markUp' onclick="markReady(event, 'N')" data-id="${koala.id}">Mark Ready</button></td>
           <td><button id='deleteKoala' onclick="deleteEntry(event)" data-id="${koala.id}">Remove Koala</button></td>
         </tr>
           `
@@ -93,12 +94,13 @@ function renderKoalas(response){
     }
 }
 
-function markReady(event){
+function markReady(event, transfer){
   const koalaReady = event.target.dataset.id;
   console.log(koalaReady);
   axios({
     method: 'PUT',
     url: `/koalas/${koalaReady}`,
+    data: {transfer: transfer}
   })
   .then((response) => {
       axios({
